@@ -24,7 +24,7 @@ gameSpace.appendChild(pile1)
 gameSpace.appendChild(pile2)
 gameSpace.appendChild(pile3)
 
-//Creating disks;
+//CREATING DISKS
 function createDisks(diskQuantity, tower) {
     for (let i = diskQuantity; i > 0; i--) {
         const disk = document.createElement('li');
@@ -39,11 +39,11 @@ createDisks(diskQuantity, pile1);
 
 //Selecionando disco
 
-pile1.addEventListener("click", select)
+pile1.addEventListener("click", clicked)
 
-pile2.addEventListener("click", select)
+pile2.addEventListener("click", clicked)
 
-pile3.addEventListener("click", select)
+pile3.addEventListener("click", clicked)
 
 
 function select(ev) {
@@ -53,4 +53,27 @@ function select(ev) {
     let disc = tower.lastElementChild
 
     return disc
+}
+
+// MOVE DISKS
+function moveDisk(disk, event) {
+
+    if (disk !== null) {
+        let tower = event.target.closest('ul').id;
+        let towerElement = document.querySelector(`#${tower}`);
+        towerElement.appendChild(disk);
+    }
+}
+
+let element = null;
+let selectDisk = true;
+
+function clicked(evt) {
+    if (selectDisk || element === null) {
+        element = select(evt);
+        selectDisk = false;
+    } else {
+        moveDisk(element, evt);
+        selectDisk = true;
+    }
 }
