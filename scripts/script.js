@@ -105,11 +105,11 @@ gameSpace.addEventListener("click", victory)
 const message = document.createElement("div")
 message.innerText = "Parabéns! Você ganhou!"
 
-function victory(){
+function victory() {
     let pile2Count = pile2.childElementCount
     let pile3Count = pile3.childElementCount
-   
-    if (pile2Count === diskQuantity || pile3Count === diskQuantity){
+
+    if (pile2Count === diskQuantity || pile3Count === diskQuantity) {
         gameSpace.appendChild(message)
         message.appendChild(resetButton)
     }
@@ -121,13 +121,31 @@ const resetButton = document.getElementById("reset")
 resetButton.addEventListener("click", reset)
 const page = document.getElementById("buttons")
 
-function reset(){    
-    for(let i = diskQuantity ; i > 0; i--){
+function reset() {
+    for (let i = diskQuantity; i > 0; i--) {
         let disk = document.getElementById(`disk${i}`)
         pile1.appendChild(disk)
-        
+
     }
-    
+
     gameSpace.removeChild(message)
-    page.appendChild(resetButton) 
+    page.appendChild(resetButton)
+}
+
+// SELECTING DIFFICULTY
+const difficultySelector = document.querySelector('#difficultySelector');
+
+difficultySelector.addEventListener('change', changeDifficulty);
+
+function changeDifficulty() {
+    diskQuantity = difficultySelector.value;
+    element = null;
+    cleanTowers();
+    createDisks(diskQuantity, pile1);
+}
+
+function cleanTowers() {
+    pile1.innerHTML = '';
+    pile2.innerHTML = '';
+    pile3.innerHTML = '';
 }
