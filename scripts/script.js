@@ -1,28 +1,51 @@
 //Selecionando main
-
 const gameSpace = document.getElementById("mainSpace")
 
-//Criado torres
-
+//Criando torres
 const pile1 = document.createElement("ul")
+const pile2 = document.createElement("ul")
+const pile3 = document.createElement("ul")
+
+//RESET
+const resetButton = document.getElementById("reset")
+const stepCountValue = document.querySelector('#stepCountValue');
+const message = document.createElement("div")
+const difficultySelector = document.querySelector('#difficultySelector');
+
 pile1.setAttribute("id", "pile1")
 pile1.classList.add('tower');
-
-const pile2 = document.createElement("ul")
 pile2.setAttribute("id", "pile2")
 pile2.classList.add('tower');
-
-const pile3 = document.createElement("ul")
 pile3.setAttribute("id", "pile3")
 pile3.classList.add('tower');
 
-
-
 //Adicionando torres à main
-
 gameSpace.appendChild(pile1)
 gameSpace.appendChild(pile2)
 gameSpace.appendChild(pile3)
+
+// EVENT LISTENERS
+difficultySelector.addEventListener('change', changeDifficulty);
+
+gameSpace.addEventListener("click", victory)
+
+resetButton.addEventListener("click", reset)
+
+//Selecionando disco
+pile1.addEventListener("click", clicked)
+
+pile2.addEventListener("click", clicked)
+
+pile3.addEventListener("click", clicked)
+
+// VARIÁVEIS
+let diskQuantity = 3;
+createDisks(diskQuantity, pile1);
+
+let element = null;
+let selectDisk = true;
+
+let steps = 0;
 
 //CREATING DISKS
 function createDisks(diskQuantity, tower) {
@@ -33,18 +56,6 @@ function createDisks(diskQuantity, tower) {
         tower.appendChild(disk);
     }
 }
-
-let diskQuantity = 3;
-createDisks(diskQuantity, pile1);
-
-//Selecionando disco
-
-pile1.addEventListener("click", clicked)
-
-pile2.addEventListener("click", clicked)
-
-pile3.addEventListener("click", clicked)
-
 
 function select(ev) {
 
@@ -65,9 +76,6 @@ function moveDisk(disk, event) {
     }
 }
 
-let element = null;
-let selectDisk = true;
-
 function clicked(evt) {
     if (selectDisk || element === null) {
         element = select(evt);
@@ -83,7 +91,6 @@ function clicked(evt) {
 }
 
 //Verificando tamanhos dos discos
-
 function validate(newDisc, oldDisc, tower) {
 
     if (oldDisc === null) {
@@ -100,25 +107,15 @@ function validate(newDisc, oldDisc, tower) {
 }
 
 // Função Reset
-
-const resetButton = document.getElementById("reset")
-resetButton.addEventListener("click", reset)
-const page = document.getElementById("buttons")
-
 function reset() {
     for (let i = diskQuantity; i > 0; i--) {
         let disk = document.getElementById(`disk${i}`)
         pile1.appendChild(disk)
     }
-
     stepCountReset();
 }
 
 // SELECTING DIFFICULTY
-const difficultySelector = document.querySelector('#difficultySelector');
-
-difficultySelector.addEventListener('change', changeDifficulty);
-
 function changeDifficulty() {
     diskQuantity = difficultySelector.value;
     element = null;
@@ -133,8 +130,6 @@ function cleanTowers() {
     pile2.innerHTML = '';
     pile3.innerHTML = '';
 }
-
-let steps = 0;
 
 function clicked(evt) {
     if (selectDisk || element === null) {
@@ -152,9 +147,6 @@ function clicked(evt) {
 }
 
 // STEP COUNT
-
-const stepCountValue = document.querySelector('#stepCountValue');
-
 function stepCount() {
     steps++;
     stepCountValue.innerText = steps;
@@ -247,15 +239,11 @@ function hideWinnerMessage() {
 }
 
 function playAgain() {
-    hideWinnerMessage()
+    hideWinnerMessage();
     reset();
 }
 
 //Função mensagem de vitória
-
-gameSpace.addEventListener("click", victory)
-const message = document.createElement("div")
-
 function victory() {
     let pile2Count = pile2.childElementCount
     let pile3Count = pile3.childElementCount
