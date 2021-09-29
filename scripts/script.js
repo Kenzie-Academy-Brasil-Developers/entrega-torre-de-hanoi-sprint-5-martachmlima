@@ -73,7 +73,28 @@ function clicked(evt) {
         element = select(evt);
         selectDisk = false;
     } else {
-        moveDisk(element, evt);
-        selectDisk = true;
+        let oldDisc = evt.target.closest('ul').lastElementChild;
+        let tower = evt.target.closest('ul');
+        if (validate(element, oldDisc, tower)) {
+            moveDisk(element, evt);
+            selectDisk = true;
+        }
     }
+}
+
+//Verificando tamanhos dos discos
+
+function validate(newDisc, oldDisc, tower) {
+
+    if (oldDisc === null) {
+        return true;
+    }
+
+    let childCount = tower.childElementCount
+
+    if (childCount !== 0 && newDisc.clientWidth > oldDisc.clientWidth) {
+        return false
+    }
+
+    return true
 }
