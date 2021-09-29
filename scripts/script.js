@@ -98,3 +98,36 @@ function validate(newDisc, oldDisc, tower) {
 
     return true
 }
+
+//Fução mensagem de vitória
+
+gameSpace.addEventListener("click", victory)
+const message = document.createElement("div")
+message.innerText = "Parabéns! Você ganhou!"
+
+function victory(){
+    let pile2Count = pile2.childElementCount
+    let pile3Count = pile3.childElementCount
+   
+    if (pile2Count === diskQuantity || pile3Count === diskQuantity){
+        gameSpace.appendChild(message)
+        message.appendChild(resetButton)
+    }
+}
+
+// Função Reset
+
+const resetButton = document.getElementById("reset")
+resetButton.addEventListener("click", reset)
+const page = document.getElementById("buttons")
+
+function reset(){    
+    for(let i = diskQuantity ; i > 0; i--){
+        let disk = document.getElementById(`disk${i}`)
+        pile1.appendChild(disk)
+        
+    }
+    
+    gameSpace.removeChild(message)
+    page.appendChild(resetButton) 
+}
