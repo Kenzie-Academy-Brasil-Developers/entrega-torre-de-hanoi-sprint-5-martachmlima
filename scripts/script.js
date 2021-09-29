@@ -103,13 +103,12 @@ function validate(newDisc, oldDisc, tower) {
 
 gameSpace.addEventListener("click", victory)
 const message = document.createElement("div")
-message.innerText = "Parabéns! Você ganhou!"
 
 function victory() {
     let pile2Count = pile2.childElementCount
     let pile3Count = pile3.childElementCount
-
     if (pile2Count === diskQuantity || pile3Count === diskQuantity) {
+        message.innerText = "Parabéns! Você ganhou!"
         gameSpace.appendChild(message)
         message.appendChild(resetButton)
     }
@@ -125,10 +124,10 @@ function reset() {
     for (let i = diskQuantity; i > 0; i--) {
         let disk = document.getElementById(`disk${i}`)
         pile1.appendChild(disk)
-
     }
 
-    gameSpace.removeChild(message)
+    stepCountReset();
+    message.innerText = '';
     page.appendChild(resetButton)
 }
 
@@ -148,4 +147,35 @@ function cleanTowers() {
     pile1.innerHTML = '';
     pile2.innerHTML = '';
     pile3.innerHTML = '';
+}
+
+let steps = 0;
+
+function clicked(evt) {
+    if (selectDisk || element === null) {
+        element = select(evt);
+        selectDisk = false;
+    } else {
+        let oldDisc = evt.target.closest('ul').lastElementChild;
+        let tower = evt.target.closest('ul');
+        if (validate(element, oldDisc, tower)) {
+            moveDisk(element, evt);
+            stepCount();
+            selectDisk = true;
+        }
+    }
+}
+
+// STEP COUNT
+
+const stepCountValue = document.querySelector('#stepCountValue');
+
+function stepCount() {
+    steps++;
+    stepCountValue.innerText = steps;
+}
+
+function stepCountReset() {
+    steps = 0;
+    stepCountValue.innerText = steps;
 }
