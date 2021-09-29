@@ -15,26 +15,30 @@
         <h1 class="title">Torre de Hanoi</h1>
     </header>
 
-    <main class="container" id="mainSpace"></main>
+    <div class="main-container" id="mainContainer">
+        <div class="main-modal" id="mainModal"></div>
+        <main class="container" id="mainSpace"></main>
 
-    <section class="buttons">
-        <div class="difficultyContainer">
-            <label for="difficulty">Dificuldade:</label>
-            <select name="difficulty" id="difficultySelector">
-                <option value="3">Fácil</option>
-                <option value="4">Médio</option>
-                <option value="5">Difícil</option>
-            </select>
+        <div class="info-background">
+            <div class="info-container">
+                <div class="step-count__container">
+                    <p class="step-count__label">Movimentos</p>
+                    <p class="step-count__value" id="stepCountValue">0</p>
+                </div>
+                <div class="button-reset__container" id="buttons">
+                    <button class="button-reset" id="reset">Resetar</button>
+                </div>
+                <div class="difficulty__container">
+                    <label class="difficulty__label" for="difficultyOptions">Dificuldade</label>
+                    <select class="difficulty__option-container" name="difficultyOptions" id="difficultySelector">
+                        <option class="difficulty__option" value="3">Fácil</option>
+                        <option class="difficulty__option" value="4">Médio</option>
+                        <option class="difficulty__option" value="5">Difícil</option>
+                    </select>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <div id="buttons">
-        <button id="reset">Resetar</button>
     </div>
-    <section class="stepCount">
-        <p class="stepCount__label">Movimentos:</p>
-        <p class="steps" id="stepCountValue">0</p>
-    </section>
 
     <script src="./scripts/script.js"></script>
 </body>

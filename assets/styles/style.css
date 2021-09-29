@@ -23,6 +23,30 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--color-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+
+/* STYLES */
+.main-container {}
+
+.main-container--blurred {
+    filter: blur(5px);
+}
+
+.main-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.main-modal--enabled {
+    z-index: -2;
 }
 
 /* HEADER */
@@ -108,6 +132,146 @@ body {
     background-color: var(--color-disk-5);
 }
 
+/* INFO CONTAINER */
+.info-background {
+    background-color: var(--color-primary);
+}
+.info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 40px 0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    height: 50px;
+}
+
+.step-count__container,
+.button-reset__container,
+.difficulty__container {
+    width: 90px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.difficulty__container,
+.step-count__container {
+    padding: 5px 0;
+    box-sizing: border-box;
+}
+
+.step-count__container {}
+
+.step-count__label,
+.step-count__value {
+    margin: 0;
+}
+
+.step-count__label {
+    font-weight: bold;
+}
+
+.step-count__value {
+    font-size: 1.2rem;
+}
+
+.button-reset__container {}
+
+.button-reset {
+    height: 50px;
+    width: 100%;
+    border: 1px solid transparent;
+    outline: 0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.button-reset:hover {
+    color: var(--color-primary);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-primary);
+}
+
+.difficulty__container {}
+
+.difficulty__label {
+    font-weight: bold;
+}
+
+.difficulty__option-container {
+    width: 100%;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    color: var(--color-white);
+    background-color: var(--color-primary-lighter);
+    font-size: 1.1rem;
+}
+
+.difficulty__option {
+    outline: 0;
+    border: none;
+}
+
+/* MESSAGE WINNER */
+.message-winner {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--color-primary-darker);
+    color: var(--color-white);
+    width: 250px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px var(--color-black);
+    z-index: 2;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.winner__title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.winner__text {}
+
+.winner__difficulty {
+    font-weight: bold;
+}
+
+.winner__steps-min {
+    font-weight: bold;
+}
+
+.winner__steps-player {
+    font-weight: bold;
+}
+
+.winner__button {
+    outline: 0;
+    border: 0;
+    height: 40px;
+    width: 150px;
+    color: var(--color-white);
+    background-color: var(--color-primary-lighter);
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.winner__button:hover{
+    background-color: var(--color-white);
+    color: var(--color-primary-darker);
+}
+
+
 @media screen and (min-width: 400px) {
                
     /* TOWER */
@@ -125,7 +289,7 @@ body {
 
     /* HEADER */
     .header{
-        margin-bottom: 100px;
+        margin-bottom: 75px;
     }
 
     /* CONTAINER */
@@ -148,6 +312,29 @@ body {
     .disk {
         height: 40px;
     }
+
+    /* INFO CONTAINER */
+    .info-container {
+        font-size: 1.1rem;
+        height: 80px;
+    }
+
+    .step-count__container,
+    .button-reset__container,
+    .difficulty__container {
+        width: 140px;
+    }
+    
+    .difficulty__container,
+    .step-count__container {
+        padding: 15px 0;
+        box-sizing: border-box;
+    }
+
+    .button-reset {
+        height: 80px;
+        font-size: 1.2rem;
+    }
 }
 
 @media screen and (min-width: 750px) {
@@ -166,6 +353,11 @@ body {
 @media screen and (min-width: 1000px) {
 
     /* TOWER */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
     .tower {
         margin-right: 10px;
         max-width: 400px;
@@ -194,5 +386,11 @@ body {
     
     .disk--5 {
         width: 250px;
+    }
+
+    /* INFO CONTAINER */
+    .info-container {
+        max-width: 800px;
+        margin: 75px auto 0;
     }
 }
